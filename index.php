@@ -1,10 +1,6 @@
 <?php
-    // Connecting to DB.
-    try{
-        $db = new PDO("mysql:host=localhost;dbname=abm", 'root', 'admin');
-    }catch (PDOException $exception){
-        $exception->getMessage();
-    }
+
+    require_once 'dbconnection.php';
 
     // Get all users data.
     $selectQuery = $db->prepare("SELECT * FROM abms");
@@ -26,7 +22,7 @@
         <div class="col">
             <div class="container">
                 <?php if(!empty($selectQuery)){ ?>
-                    <table>
+                    <table id="table">
                         <thead>
                         <tr>
                             <th>ID</th>
@@ -51,11 +47,17 @@
 
         <div class="col">
             <!-- here add button and display form -->
-            <button id="btn" class="btn btn-primary">Form</button>
-        </div>
-
-        <div class="col">
-
+            <button id="btn"  style="margin: 35px 5px;" class="btn btn-primary">Form</button>
+            <br>
+            <form action="send.php" class="module">
+                <label for="name">Name</label>
+                <input type="text" autocomplete="off" class="form-control" id="name" placeholder="Enter name" name="name" required>
+                <br>
+                <label for="mobile_no">age</label>
+                <input type="text" autocomplete="off" class="form-control" id="age" name="age" placeholder="Age" required>
+                <br>
+                <input type="submit" value="insert" class="submit">
+            </form>
         </div>
     </div>
 
